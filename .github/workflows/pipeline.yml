@@ -91,6 +91,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: ${{ inputs.version }}
         with:
-          files: DevOpsDaysTasks/**
+          name: DevOpsDaysTasks
           tag_name: ${{ env.versionName }}
           files: DevOpsDaysTasks_${{ inputs.version }}.zip
