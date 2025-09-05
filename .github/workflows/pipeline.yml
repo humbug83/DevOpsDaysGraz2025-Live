@@ -14,6 +14,9 @@ on:
         required: true
         default: string
 
+permissions:
+  contents: write
+
 jobs:
   release-pipeline:
    name: Release Pipeline
@@ -85,7 +88,7 @@ jobs:
       - name: Create Zip
         if: ${{ inputs.version }}
         run: |
-          Compress-Archive -Path DevOpsDaysTasks/** -DestinationPath DevOpsDaysTasks_${{ inputs.version }}.zip
+          Compress-Archive -Path DevOpsDaysTasks -DestinationPath DevOpsDaysTasks_${{ inputs.version }}.zip
 
       - name: Release
         uses: softprops/action-gh-release@v1
