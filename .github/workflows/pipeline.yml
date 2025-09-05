@@ -8,6 +8,8 @@ jobs:
   release-pipeline:
    name: Release Pipeline\
    runs-on: windows-latest
+   env:
+      PFX_CERT_NAME: whoopsydaisy.pfx
    steps:
       - uses: actions/checkout@v4
         
@@ -50,7 +52,8 @@ jobs:
           Set-Content ${{ env.PFX_CERT_NAME }} -value $contet -AsByteStream
 
       - name: Sign Release
-        run: .\scripts\sign.ps1 .\DevOpsDaysTasks\DevOpsDaysTasks.UI.exe -PfxFile .\workshop_material\devopsdays_tasks_codesign.pfx -PfxPassword Password
+        # run: .\scripts\sign.ps1 .\DevOpsDaysTasks\DevOpsDaysTasks.UI.exe -PfxFile .\workshop_material\devopsdays_tasks_codesign.pfx -PfxPassword Password
+        run: .\scripts\sign.ps1 .\DevOpsDaysTasks\DevOpsDaysTasks.UI.exe -PfxFile ${{ env.PFX_CERT_NAME }} -PfxPassword ${{ secrets.PFX_PASSWORD }}
 
       # We don't have a release
       - name: Upload Artifact
