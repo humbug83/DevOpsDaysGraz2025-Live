@@ -3,13 +3,23 @@ name: Release Pipeline
 
 on:
   push: {}
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release Version'
+        required: true
+        default: string
+      versionName:
+        description: 'Release Version Name'
+        required: true
+        default: string
 
 jobs:
   release-pipeline:
    name: Release Pipeline
    runs-on: windows-latest
    env:
-      PFX_CERT_NAME: whoopsydaisy.pfx
+      PFX_CERT_NAME: cert.pfx
       EXTERNAL_FILES: martinzimmermann/DevOpsDaysGraz2025-ExternalFiles
    steps:
       - uses: actions/checkout@v4
@@ -32,7 +42,10 @@ jobs:
 
       # Problem: Hardcoded Release version
       - name: Publish Build
-        run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version=1.0.0 /p:VersionName=Bobcat
+        env:
+          VERSION: ${{ inputs.version || "0.0.0" }}
+          VERSIONNAME: ${{ inputs.versionName || "LoelchenEinRoellchen" }}
+        run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version=${{ env.VERSION }} /p:VersionName=${{ env.VERSIONNAME }} 
 
       - name: Checkout external Repo
         uses: actions/checkout@v4
