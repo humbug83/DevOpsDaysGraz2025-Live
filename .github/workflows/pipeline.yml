@@ -83,6 +83,7 @@ jobs:
           name: DevOpsDaysTasks
 
       - name: Create Zip
+        if: ${{ inputs.version }}
         run: |
           Compress-Archive -Path DevOpsDaysTasks/** -DestinationPath DevOpsDaysTasks_${{ inputs.version }}.zip
 
