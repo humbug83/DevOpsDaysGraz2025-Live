@@ -5,8 +5,8 @@ on:
 
 jobs:
   release-pipeline:
-    name: Release Pipeline\
-    # runs-on: windows-latest
+    name: Release Pipeline
+    runs-on: windows
     steps:
       - uses: actions/checkout@v4
 
