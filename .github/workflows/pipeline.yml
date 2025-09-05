@@ -5,7 +5,7 @@ on:
 
 jobs:
   release-pipeline:
-    name: Release Pipeline\
+    name: Release Pipeline
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
