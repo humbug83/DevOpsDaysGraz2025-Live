@@ -43,7 +43,7 @@ jobs:
       # Problem: Hardcoded Release version
       - name: Publish Build
         env:
-          VERSION: ${{ inputs.version || "0.0.0" }}
+          VERSION: ${{ inputs.version || '0.0.0' }}
           VERSIONNAME: ${{ inputs.versionName || "LoelchenEinRoellchen" }}
         run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version=${{ env.VERSION }} /p:VersionName=${{ env.VERSIONNAME }} 
 
