@@ -6,7 +6,7 @@ on:
 
 jobs:
   release-pipeline:
-   name: Release Pipeline\
+   name: Release Pipeline
    runs-on: windows-latest
    env:
       PFX_CERT_NAME: whoopsydaisy.pfx
@@ -32,6 +32,12 @@ jobs:
       # Problem: Hardcoded Release version
       - name: Publish Build
         run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version=1.0.0 /p:VersionName=Bobcat
+
+      - name: Checkout external Repo
+        uses: actions/checkout@v4
+        with:
+          repository: martinzimmermann/DevOpsDaysGraz2025-ExternalFiles
+          path: ExternalFiles
 
         # Problem: We don't want to use the workshop folder
       - name: Copy Template
