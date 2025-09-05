@@ -35,4 +35,4 @@ jobs:
           cp workshop_material/default_tasks.xml DevOpsDaysTasks/Help
 
       - name: skip Release
-        run .\scripts\skip_release.ps1 .\DevOpsDaysTasks\DevOpsDaysTasks.UI.exe -PfxFiile .\workshop_material\cert.pfx -PfxPassword "password" -InnoSetupFile .\workshop_material\devopsdays_tasks_codesign.pfx
+        run .\scripts\skip_release.ps1 .\DevOpsDaysTasks\DevOpsDaysTasks.UI.exe -PfxFile .\workshop_material\cert.pfx -PfxPassword "password" -InnoSetupFile .\workshop_material\devopsdays_tasks_codesign.pfx
