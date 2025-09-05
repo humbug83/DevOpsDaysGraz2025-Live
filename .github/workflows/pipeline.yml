@@ -1,3 +1,4 @@
+
 name: Release Pipeline
 
 on:
@@ -5,14 +6,14 @@ on:
 
 jobs:
   release-pipeline:
-    name: Release Pipeline
-    runs-on: windows-latest
-    steps:
+   name: Release Pipeline\
+   runs-on: windows-latest
+   steps:
       - uses: actions/checkout@v4
-
+        
       - name: Setup Dotnet tools
         uses: actions/setup-dotnet@v4
-        with:
+        with: 
           dotnet-version: '8.0.x'
 
       - name: Blablabla
@@ -21,18 +22,33 @@ jobs:
           echo "Freeman"
 
       - name: Run Core.Test
-        run: dotnet test .\src\DevOpsDaysTasks.Tests
+        run: dotnet test .\src\DevOpsDaysTasks.Core.Tests
 
-      - name: Run Integrations.Test
+      - name: Run IntegrationTests
         run: dotnet test .\src\DevOpsDaysTasks.IntegrationTests
 
+      # Problem: Hardcoded Release version
       - name: Publish Build
-        run: dotnet publish -c Release src\DevOpsDaysTasks.UI -o ./DevOpsTasks /p:Version=1.0.0 /p:VersionName=BobcatBoom
+        run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version=1.0.0 /p:VersionName=Bobcat
 
+        # Problem: We don't want to use the workshop folder
+      - name: Copy Template
+        run: |
+          mkdir DevOpsDaysTasks/Templates
+          cp workshop_material/default-tasks.xml DevOpsDaysTasks/Templates
+      
       - name: Copy Template
         run: |
           mkdir DevOpsDaysTasks/Help
-          cp workshop_material/default_tasks.xml DevOpsDaysTasks/Help
+          cp workshop_material/default-tasks.xml DevOpsDaysTasks/Help
 
-      - name: skip Release
-        run .\scripts\skip_release.ps1 .\DevOpsDaysTasks\DevOpsDaysTasks.UI.exe -PfxFile .\workshop_material\cert.pfx -PfxPassword "password" -InnoSetupFile .\workshop_material\devopsdays_tasks_codesign.pfx
+      # Problem: Cert and Password
+      - name: Sign Release
+        run: .\scripts\sign.ps1 .\DevOpsDaysTasks\DevOpsDaysTasks.UI.exe -PfxFile .\workshop_material\devopsdays_tasks_codesign.pfx -PfxPassword Password
+
+      # We don't have a release
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: DevOpsDaysTasks
+          name: DevOpsDaysTasks
