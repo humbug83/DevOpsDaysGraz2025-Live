@@ -6,7 +6,7 @@ on:
 jobs:
   release-pipeline:
     name: Release Pipeline\
-    runs-on: windows-latest
+    # runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -14,6 +14,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+
+      - name: Blablabla
+        run: |
+          echo "Mr."
+          echo "Freeman"
 
       - name: Run Core.Test
         run: dotnet test .\src\DevOpsDaysTasks.Tests
