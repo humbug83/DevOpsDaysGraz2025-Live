@@ -91,7 +91,7 @@ jobs:
           Compress-Archive -Path DevOpsDaysTasks -DestinationPath DevOpsDaysTasks_${{ inputs.version }}.zip
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v4
         if: ${{ inputs.version }}
         with:
           name: DevOpsDaysTasks
