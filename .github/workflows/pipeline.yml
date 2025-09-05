@@ -10,6 +10,7 @@ jobs:
    runs-on: windows-latest
    env:
       PFX_CERT_NAME: whoopsydaisy.pfx
+      EXTERNAL_FILES: martinzimmermann/DevOpsDaysGraz2025-ExternalFiles
    steps:
       - uses: actions/checkout@v4
         
@@ -36,7 +37,7 @@ jobs:
       - name: Checkout external Repo
         uses: actions/checkout@v4
         with:
-          repository: martinzimmermann/DevOpsDaysGraz2025-ExternalFiles
+          repository: ${{ env.EXTERNAL_FILES }}
           path: ExternalFiles
 
         # Problem: We don't want to use the workshop folder
