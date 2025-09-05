@@ -1,4 +1,4 @@
-name: Release Pipline
+name: Release Pipeline
 
 on:
   push: {}
@@ -16,4 +16,4 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Run Core.Test
-        run: dotnet test src/DevOpsDaysTasks.tests\
+        run: dotnet test .\src\DevOpsDaysTasks.Tests
