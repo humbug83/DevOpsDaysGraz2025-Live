@@ -82,13 +82,13 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          path: DevOpsDaysTasks
+          path: DevOpsDaysGraz2025-Live
           name: DevOpsDaysTasks
 
       - name: Create Zip
         if: ${{ inputs.version }}
         run: |
-          Compress-Archive -Path DevOpsDaysTasks -DestinationPath DevOpsDaysTasks.zip
+          Compress-Archive -Path DevOpsDaysGraz2025-Live -DestinationPath DevOpsDaysTasks.zip
 
       - name: Release
         uses: softprops/action-gh-release@v2
